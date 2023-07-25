@@ -7,7 +7,7 @@
 #include "sdl_utils.h"
 #include "utilities.h"
 
-int main(void) { 
+int main(void) {
     SDL_Window* window = NULL;
     SDL_Surface* screen_surface = NULL;
     sdl_init(&screen_surface, &window, "Beautiful Noise");
@@ -23,7 +23,7 @@ int main(void) {
                     break;
 
                 case SDL_WINDOWEVENT:
-                    if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) 
+                    if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                         sdl_resurface(&screen_surface, &window);
                     break;
 
@@ -31,12 +31,12 @@ int main(void) {
                     break;
             }
         }
-        
+
         // draw calls
         SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0x00, 0x00, 0x00));
         SDL_UpdateWindowSurface(window);
         // draw calls
-        
+
         fps_sync();
     }
 

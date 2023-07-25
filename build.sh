@@ -29,7 +29,7 @@ cat tmp.txt \
             if (gsub("Time variable", (file_index <= split(list, arr) ? arr[file_index] : "File"))) {
                 file_index = (file_index < length(arr) ? file_index + 1 : 1)
             }
-            print 
+            print
         }'
 
 echo "\nBuilding..."
