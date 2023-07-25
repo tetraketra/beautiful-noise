@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdint.h>
 
 #include "utilities.h"
-#include <time.h>
 
 int FPS;
 int FRAME_TIME_MICROSECONDS;
@@ -21,4 +22,8 @@ void fps_sync(void) {
 
 void log_error(const char* message, const char* err) {
     printf("%s Error: %s\n", message, err);
+}
+
+uint32 compose_pixel(uint8 red, uint8 green, uint8 blue, uint8 alpha) {
+    return ((uint32)alpha << 24) | ((uint32)blue << 16) | ((uint32)green << 8) | (uint32)red;
 }

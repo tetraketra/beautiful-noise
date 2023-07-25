@@ -9,8 +9,18 @@
 
 int main(void) {
     SDL_Window* window = NULL;
-    SDL_Surface* screen_surface = NULL;
-    sdl_init(&screen_surface, &window, "Beautiful Noise");
+    SDL_Renderer* rend = NULL;
+    sdl_init(&window, &rend, "Beautiful Noise");
+
+    // testing
+    SDL_Texture *texture = SDL_CreateTexture(rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STATIC, 256, 256);
+    uint32 pixels[256 * 256];
+    for (int i = 0; i < 256 * 256; i++) {
+        pixels[i] = compose_pixel(0xFF, 0xFF, 0xFF, rand() % 255);
+    }
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    SDL_UpdateTexture(texture, NULL, pixels, 256 * 4);
+    // testing
 
     init_fps_sync(60);
     bool quit = false; SDL_Event e;
@@ -23,8 +33,9 @@ int main(void) {
                 }
 
                 case SDL_WINDOWEVENT: {
-                    if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-                        sdl_resurface(&screen_surface, &window);
+                    if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+                        // not needed yet actually
+                    }
                     break;
                 }
 
@@ -35,8 +46,9 @@ int main(void) {
         } // end polling
 
         // draw calls
-        SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0x00, 0x00, 0x00));
-        SDL_UpdateWindowSurface(window);
+        SDL_RenderClear(rend);
+        SDL_RenderCopy(rend, texture, NULL, NULL); // testing
+        SDL_RenderPresent(rend);
         // draw calls
 
         fps_sync();

@@ -10,7 +10,6 @@
     exit(code);                                        \
     }
 
-void sdl_init(SDL_Surface** screen_surface, SDL_Window** window, char* window_title);
-void sdl_resurface(SDL_Surface** screen_surface, SDL_Window** window);
+void sdl_init(SDL_Window** window, SDL_Renderer** rend, char* window_title);
 
 #endif

@@ -6,6 +6,9 @@
         "stdio.h": "c",
         "utilities.h": "c",
         "stdbool.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c",
+        "stdint.h": "c"
     }
 }
