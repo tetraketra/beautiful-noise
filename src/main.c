@@ -18,7 +18,7 @@ int main(void) {
     SDL_Texture *texture = SDL_CreateTexture(rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STATIC, tex_w, tex_h);
     uint32 pixels[tex_w * tex_h];
     for (int i = 0; i < tex_w * tex_h; i++) {
-        pixels[i] = compose_pixel(0xFF, 0xFF, 0xFF, rand() % 255);
+        pixels[i] = compose_pixel(rand()%255, rand()%255, rand()%255, 0xFF);
     }
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     SDL_UpdateTexture(texture, NULL, pixels, tex_w * 4);
