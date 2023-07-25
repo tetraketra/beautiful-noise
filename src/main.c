@@ -13,24 +13,26 @@ int main(void) {
     sdl_init(&screen_surface, &window, "Beautiful Noise");
 
     init_fps_sync(60);
-    bool quit = false;
-    SDL_Event e;
+    bool quit = false; SDL_Event e;
     while (start_time = clock(), !quit) {
         while (SDL_PollEvent(&e) != 0) {
             switch (e.type) { // handle events
-                case SDL_QUIT:
+                case SDL_QUIT: {
                     quit = true;
                     break;
+                }
 
-                case SDL_WINDOWEVENT:
+                case SDL_WINDOWEVENT: {
                     if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                         sdl_resurface(&screen_surface, &window);
                     break;
+                }
 
-                default:
+                default: {
                     break;
+                }
             }
-        }
+        } // end polling
 
         // draw calls
         SDL_FillRect(screen_surface, NULL, SDL_MapRGB(screen_surface->format, 0x00, 0x00, 0x00));
@@ -38,7 +40,7 @@ int main(void) {
         // draw calls
 
         fps_sync();
-    }
+    } // end program
 
     sdl_full_shutdown(window, 0);
 }
