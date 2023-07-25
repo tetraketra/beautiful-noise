@@ -7,7 +7,7 @@
 #include "sdl_utils.h"
 #include "utilities.h"
 
-int main(void) {
+int main(void) { 
     SDL_Window* window = NULL;
     SDL_Surface* screen_surface = NULL;
     sdl_init(&screen_surface, &window, "Beautiful Noise");
