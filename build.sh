@@ -2,7 +2,7 @@ FILES=$(find ./src/*.c -type f | tr -s '\n' ' ')
 WARNS="-W -Wextra -Wno-multichar -Wall"
 LINKS="-lSDL2 -std=gnu2x"
 DEBUG="-g3"
-FNAME="beautiful_noise"
+FNAME="beautiful-noise"
 
 echo "Executing with..."
 echo "FILES: $FILES"
