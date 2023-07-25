@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "sdl.h": "c",
+        "system_error": "c",
+        "sdl_utils.h": "c",
+        "stdio.h": "c",
+        "utilities.h": "c",
+        "stdbool.h": "c",
+        "time.h": "c"
+    }
+}
