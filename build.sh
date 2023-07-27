@@ -1,6 +1,6 @@
 FILES=$(find ./src/*.c -type f | tr -s '\n' ' ')
 WARNS="-W -Wextra -Wno-multichar -Wall"
-LINKS="-lSDL2 -std=gnu2x"
+LINKS="-lSDL2 -lSDL2_ttf -std=gnu2x"
 DEBUG="-g3"
 FNAME="beautiful-noise"
 

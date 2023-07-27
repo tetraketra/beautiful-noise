@@ -9,6 +9,8 @@
         "time.h": "c",
         "stdlib.h": "c",
         "unistd.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "sdl_ttf.h": "c",
+        "limits.h": "c"
     }
 }
