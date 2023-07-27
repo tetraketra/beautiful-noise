@@ -10,27 +10,45 @@
 #include "sdl_utils.h"
 #include "utilities.h"
 
-#define TEXT_OUTLINE_SIZE 2
-
 int main(int argc, char *argv[]) {
+    // set up directory handling
     char srcdir[PATH_MAX];
     strncpy(srcdir, argv[0], sizeof(srcdir));
     dirname(srcdir);
     strncat(srcdir, "/../src", sizeof(srcdir) - 1);
 
+    // set up sdl
     SDL_Window* window = NULL;
     SDL_Renderer* rend = NULL;
     TTF_Font*     font = NULL;
     sdl_init(&window, &rend, &font, srcdir, "Beautiful Noise");
     TTF_SetFontHinting(font, TTF_HINTING_MONO);
 
+    // set up display tree
+    dt_tree_node* root = calloc(1, sizeof(dt_tree_node));
+    strcpy(root->data, "beautiful noise");
+    root->num_children = 3;
+    root->children = calloc(root->num_children, sizeof(dt_tree_node*));
+
+        // ONLY FOR TESTING
+        dt_tree_node* one_child = calloc(1, sizeof(dt_tree_node));
+        strcpy(one_child->data, "one child");
+        one_child->num_children = 1;
+        one_child->children = calloc(one_child->num_children, sizeof(dt_tree_node*));
+
+        dt_tree_node* zero_child = calloc(1, sizeof(dt_tree_node));
+        strcpy(zero_child->data, "zero child");
+        zero_child->num_children = 0;
+        zero_child->children = calloc(zero_child->num_children, sizeof(dt_tree_node*));
+
+        root->children[0] = zero_child;
+        root->children[1] = one_child;
+        root->children[2] = zero_child;
+        one_child->children[0] = zero_child;
+        // ONLY FOR TESTING
     
-    SDL_Color       white = {0XFF, 0XFF, 0XFF, 0xFF};
-    SDL_Color          bg = {0X00, 0X00, 0X00, 0xFF};
-    SDL_Surface*   s_text = TTF_RenderText_Solid(font, "example text", white); 
-    SDL_FillRect(s_text, 0, SDL_MapRGBA(s_text->format, 0, 0, 0, 0xFF));
-    SDL_Texture*   t_text = SDL_CreateTextureFromSurface(rend, s_text);
-    SDL_Rect         dest = {TEXT_OUTLINE_SIZE, TEXT_OUTLINE_SIZE, s_text->w, s_text->h};    
+    SDL_Color       white = {.r = 0xFF, .g = 0xFF, .b = 0xFF, .a = 0xFF};
+    SDL_Color          bg = {.r = 0x00, .g = 0x00, .b = 0x00, .a = 0x7F};
 
     init_fps_sync(60);
     bool quit = false; SDL_Event e;
@@ -58,13 +76,14 @@ int main(int argc, char *argv[]) {
         // draw calls
         SDL_RenderClear(rend);
 
-        SDL_RenderCopy(rend, t_text, NULL, &dest);
+        dt_render_background(root, 5, 5, &rend, &font, &bg);
+        dt_render_content(root, 0, 0, 10, 5, &rend, &font, &white);
 
         SDL_RenderPresent(rend);
         // draw calls
 
         fps_sync();
-    } // end program
+    } // end update loop
 
     sdl_full_shutdown(&window, 0);
-}
+} // end program

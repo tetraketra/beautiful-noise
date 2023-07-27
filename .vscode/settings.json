@@ -11,6 +11,13 @@
         "unistd.h": "c",
         "stdint.h": "c",
         "sdl_ttf.h": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c",
+        "string.h": "c",
+        "random": "c",
+        "algorithm": "c"
     }
 }
