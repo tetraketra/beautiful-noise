@@ -4,6 +4,8 @@ int FPS;
 int FRAME_TIME_MICROSECONDS;
 clock_t start_time, end_time;
 
+// FPS SYNC ==================================================================
+
 void init_fps_sync(int fps) {
     FPS = fps;
     FRAME_TIME_MICROSECONDS = 1000000 / FPS;
@@ -16,13 +18,13 @@ void fps_sync(void) {
         nanosleep((struct timespec[]){{0, 300L}},NULL);
 }
 
+// ERROR HANDLING ===========================================================
+
 void log_error(const char* message, const char* err) {
     printf("%s Error: %s\n", message, err);
 }
 
-uint32 compose_pixel(uint8 red, uint8 green, uint8 blue, uint8 alpha) {
-    return ((uint32)alpha << 24) | ((uint32)blue << 16) | ((uint32)green << 8) | (uint32)red;
-}
+// DISPLAY TREE =============================================================
 
 int _dt_total_height(dt_tree_node* node) {
     if (!node)
@@ -49,14 +51,14 @@ int dt_max_width(dt_tree_node* node) {
         max_width = max(child_height, max_width);
     }
 
-    return strlen(node->data) + 1;
+    return strlen(node->title) + 1;
 }
 
 int dt_render_content(dt_tree_node* node, int line, int indent, int startx, int starty, SDL_Renderer** rend, TTF_Font** font, SDL_Color* color) {
     if (!node)
         return 0;
 
-    SDL_Surface* text_surface = TTF_RenderText_Solid(*font, node->data, *color);
+    SDL_Surface* text_surface = TTF_RenderText_Solid(*font, node->title, *color);
     SDL_Texture* text_texture = SDL_CreateTextureFromSurface(*rend, text_surface); SDL_FreeSurface(text_surface);
     SDL_Rect dest = {.x = startx + indent*DT_INDENT_PIX_WIDTH, .y = starty + line*text_surface->h,  .w = text_surface->w, .h = text_surface->h};  
     SDL_RenderCopy(*rend, text_texture, NULL, &dest); SDL_DestroyTexture(text_texture);

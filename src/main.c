@@ -26,18 +26,18 @@ int main(int argc, char *argv[]) {
 
     // set up display tree
     dt_tree_node* root = calloc(1, sizeof(dt_tree_node));
-    strcpy(root->data, "beautiful noise");
+    strcpy(root->title, "beautiful noise");
     root->num_children = 3;
     root->children = calloc(root->num_children, sizeof(dt_tree_node*));
 
         // ONLY FOR TESTING
         dt_tree_node* one_child = calloc(1, sizeof(dt_tree_node));
-        strcpy(one_child->data, "one child");
+        strcpy(one_child->title, "one child");
         one_child->num_children = 1;
         one_child->children = calloc(one_child->num_children, sizeof(dt_tree_node*));
 
         dt_tree_node* zero_child = calloc(1, sizeof(dt_tree_node));
-        strcpy(zero_child->data, "zero child");
+        strcpy(zero_child->title, "zero child");
         zero_child->num_children = 0;
         zero_child->children = calloc(zero_child->num_children, sizeof(dt_tree_node*));
 

@@ -18,6 +18,8 @@
         "vector": "c",
         "string.h": "c",
         "random": "c",
-        "algorithm": "c"
-    }
+        "algorithm": "c",
+        "__node_handle": "c"
+    },
+    "C_Cpp.dimInactiveRegions": true
 }
