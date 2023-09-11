@@ -19,7 +19,23 @@
         "string.h": "c",
         "random": "c",
         "algorithm": "c",
-        "__node_handle": "c"
+        "__node_handle": "c",
+        "queue": "c",
+        "optional": "c",
+        "ratio": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "__bit_reference": "c",
+        "__functional_base": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "deque": "c",
+        "__memory": "c",
+        "iterator": "c",
+        "limits": "c",
+        "memory": "c"
     },
     "C_Cpp.dimInactiveRegions": true
 }

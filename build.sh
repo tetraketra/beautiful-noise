@@ -10,7 +10,7 @@ echo "WARNS: $WARNS"
 echo "LINKS: $LINKS"
 echo "DEBUG: $DEBUG"
 
-echo "\nCounting..."
+echo "Counting..."
 find ./ -type f \( -iname \*.c -o -iname \*.h \) \
     | xargs wc -l \
     | sort -nr
@@ -19,7 +19,7 @@ find ./ -type f \( -iname \*.c -o -iname \*.h \) \
 gcc $FILES -o ./bin/$FNAME $WARNS $LINKS $DEBUG -ftime-report \
     > tmp.txt 2>&1
 
-echo "\nReporting..."
+echo "Reporting..."
 cat tmp.txt \
     | grep -E --color=never '^(Time variable| [[:alnum:]])' \
     | cut -c1-36,69-79 \
@@ -32,7 +32,7 @@ cat tmp.txt \
             print
         }'
 
-echo "\nBuilding..."
+echo "Building..."
 cat tmp.txt \
     | grep -v -E '^(Time variable| [[:alnum:]])' \
     | grep -v '^$'
@@ -40,4 +40,4 @@ cat tmp.txt \
 rm tmp.txt
 
 chmod a+x ./bin/$FNAME
-echo "\nExecute ./bin/$FNAME to start $FNAME."
+echo "Execute ./bin/$FNAME to start $FNAME."

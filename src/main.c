@@ -25,11 +25,40 @@ int main(int argc, char *argv[]) {
     TTF_SetFontHinting(font, TTF_HINTING_MONO);
     
     // BASE STATE TESTING
-    texture_node add_blend = {
-        .node_type = NT_B_additive,
-        .num_children = 2,  .children = nullptr,
-        .num_config = 1,    .config = nullptr,
-    };
+        texture_node testing_node_info = {
+            .node_type = NT_B_additive, 
+            .num_children = 1, .num_config = 3,
+        };
+        config_pair testing_node_config[3] = {
+            (config_pair) {.type = CT_alpha, .value = (config_value) {.alpha = 2} },
+            (config_pair) {.type = CT_blue, .value = (config_value) {.blue = 10} },
+            (config_pair) {.type = CT_title, .value = (config_value) {.title = "testing"} },
+        };
+        texture_node* testing_root_node = tn_init(&testing_node_info, testing_node_config);
+        
+        texture_node testing_noise = {
+            .node_type = NT_G_rand,
+            .num_children = 2, .num_config = 1,
+        };
+        config_pair testing_noise_config[2] = {
+            (config_pair) {.type = CT_seed, .value = (config_value) {.seed = 123} },
+        };
+        texture_node* testing_noise_node = tn_init(&testing_noise, testing_noise_config);
+
+        texture_node testing_solid = {
+            .node_type = NT_G_solid,
+            .num_children = 0, .num_config = 1,
+        };
+        config_pair testing_solid_config[1] = {
+            (config_pair) {.type = CT_title, .value = (config_value) {.title = "beeeeeeeeeeeeeg"} },
+        };
+        texture_node* testing_solid_node = tn_init(&testing_solid, testing_solid_config);
+
+        testing_root_node->children[0] = testing_noise_node;
+        testing_noise_node->children[0] = testing_solid_node;
+        testing_noise_node->children[1] = testing_solid_node;
+
+    // BASE STATE TESTING
     
     SDL_Color       white = {.r = 0xFF, .g = 0xFF, .b = 0xFF, .a = 0xFF};
     SDL_Color          bg = {.r = 0x00, .g = 0x00, .b = 0x00, .a = 0x7F};
@@ -60,8 +89,8 @@ int main(int argc, char *argv[]) {
         // draw calls
         SDL_RenderClear(rend);
 
-        // dt_render_background(root, 5, 5, &rend, &font, &bg);
-        // dt_render_content(root, 0, 0, 10, 5, &rend, &font, &white);
+        tt_render_background(testing_root_node, 5, 5, &rend, &font, &bg);
+        tt_render_content(testing_root_node, 0, 0, 10, 5, &rend, &font, &white);
 
         SDL_RenderPresent(rend);
         // draw calls
