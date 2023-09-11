@@ -23,29 +23,13 @@ int main(int argc, char *argv[]) {
     TTF_Font*     font = NULL;
     sdl_init(&window, &rend, &font, srcdir, "Beautiful Noise");
     TTF_SetFontHinting(font, TTF_HINTING_MONO);
-
-    // set up display tree
-    dt_tree_node* root = calloc(1, sizeof(dt_tree_node));
-    strcpy(root->title, "beautiful noise");
-    root->num_children = 3;
-    root->children = calloc(root->num_children, sizeof(dt_tree_node*));
-
-        // ONLY FOR TESTING
-        dt_tree_node* one_child = calloc(1, sizeof(dt_tree_node));
-        strcpy(one_child->title, "one child");
-        one_child->num_children = 1;
-        one_child->children = calloc(one_child->num_children, sizeof(dt_tree_node*));
-
-        dt_tree_node* zero_child = calloc(1, sizeof(dt_tree_node));
-        strcpy(zero_child->title, "zero child");
-        zero_child->num_children = 0;
-        zero_child->children = calloc(zero_child->num_children, sizeof(dt_tree_node*));
-
-        root->children[0] = zero_child;
-        root->children[1] = one_child;
-        root->children[2] = zero_child;
-        one_child->children[0] = zero_child;
-        // ONLY FOR TESTING
+    
+    // BASE STATE TESTING
+    texture_node add_blend = {
+        .node_type = NT_B_additive,
+        .num_children = 2,  .children = nullptr,
+        .num_config = 1,    .config = nullptr,
+    };
     
     SDL_Color       white = {.r = 0xFF, .g = 0xFF, .b = 0xFF, .a = 0xFF};
     SDL_Color          bg = {.r = 0x00, .g = 0x00, .b = 0x00, .a = 0x7F};
@@ -76,8 +60,8 @@ int main(int argc, char *argv[]) {
         // draw calls
         SDL_RenderClear(rend);
 
-        dt_render_background(root, 5, 5, &rend, &font, &bg);
-        dt_render_content(root, 0, 0, 10, 5, &rend, &font, &white);
+        // dt_render_background(root, 5, 5, &rend, &font, &bg);
+        // dt_render_content(root, 0, 0, 10, 5, &rend, &font, &white);
 
         SDL_RenderPresent(rend);
         // draw calls
